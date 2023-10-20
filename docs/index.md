@@ -1,17 +1,7 @@
-# Welcome to MkDocs
+# 分布式加密文件系统基础服务
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+## 1. 主要目标
 
-## Commands
-
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+1. 多平台SDK、多平台GUI
+2. 使用非对称加密、对称加密相结合对文件进行加密
+3. 使用C/C++进行内核封装
