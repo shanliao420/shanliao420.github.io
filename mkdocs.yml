@@ -3,6 +3,9 @@ site_url: https://shanliao420.github.io
 theme:
    name: material
    logo: assets/logo.png
+   features:
+      - navigation.tabs
+      - navigation.instants
    palette:
       # Palette toggle for dark mode
       - media: "(prefers-color-scheme: dark)"
