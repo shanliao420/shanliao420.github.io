@@ -2,6 +2,7 @@ site_name: shanliao documents
 site_url: https://shanliao420.github.io
 theme:
    name: material
+   logo: assets/logo.png
    palette:
       # Palette toggle for dark mode
       - media: "(prefers-color-scheme: dark)"
