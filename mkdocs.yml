@@ -3,6 +3,7 @@ site_url: https://shanliao420.github.io
 theme:
    name: material
    logo: assets/logo.png
+   custom_dir: overrides
    features:
       - navigation.tabs
       - navigation.instants
