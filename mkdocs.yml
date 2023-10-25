@@ -7,7 +7,7 @@ theme:
    custom_dir: overrides
    features:
       - navigation.tabs
-      - navigation.instants
+      - navigation.instant
    palette:
       # Palette toggle for dark mode
       - media: "(prefers-color-scheme: dark)"
