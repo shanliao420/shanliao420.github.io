@@ -1,6 +1,39 @@
-# 20230324[1]  GoodFuture
+# 20230324[1] 100tal.com
 
 ## 堆排序算法实现
+
+```Go
+func shiftDown(num *[]int, i int, size int) {
+	for {
+		left := 2*i + 1
+		right := 2*i + 2
+		maxIdx := i
+		if left < size && (*num)[left] > (*num)[maxIdx] {
+			maxIdx = left
+		}
+		if right < size && (*num)[right] > (*num)[maxIdx] {
+			maxIdx = right
+		}
+		if maxIdx == i {
+			break
+		}
+		(*num)[maxIdx], (*num)[i] = (*num)[i], (*num)[maxIdx]
+		i = maxIdx
+	}
+}
+
+func HeapSort(num *[]int) {
+	for i := len(*num)/2 - 1; i >= 0; i-- {
+		shiftDown(num, i, len(*num))
+	}
+	for i := len(*num) - 1; i > 0; i-- {
+		(*num)[i], (*num)[0] = (*num)[0], (*num)[i]
+		shiftDown(num, 0, i)
+	}
+}
+
+```
+
 
 ## Redis跳表实现、源码阅读计划
 
@@ -9,3 +42,90 @@
 ## gin框架实现原理
 
 ## gorm框架实现原理
+
+## 附：大顶堆实现
+
+```Go
+package main
+
+type Comparable interface {
+	Diff(a Comparable) int
+}
+
+type MaxHeap struct {
+	data []Comparable
+}
+
+func (h *MaxHeap) left(i int) int {
+	return 2*i + 1
+}
+
+func (h *MaxHeap) right(i int) int {
+	return 2*i + 2
+}
+
+func (h *MaxHeap) parent(i int) int {
+	return (i - 1) / 2
+}
+
+func (h *MaxHeap) Top() any {
+	return h.data[0]
+}
+
+func (h *MaxHeap) swap(a int, b int) {
+	h.data[a], h.data[b] = h.data[b], h.data[a]
+}
+
+func (h *MaxHeap) shiftUp(i int) {
+	for {
+		p := h.parent(i)
+		if p < 0 || h.data[p].Diff(h.data[i]) < 0 {
+			break
+		}
+		h.swap(i, p)
+		i = p
+	}
+}
+
+func (h *MaxHeap) Push(val Comparable) {
+	h.data = append(h.data, val)
+	h.shiftUp(len(h.data) - 1)
+}
+
+func (h *MaxHeap) shiftDown(i int) {
+	for {
+		left := h.left(i)
+		right := h.right(i)
+		maxIdx := i
+		if left < len(h.data) && h.data[left].Diff(h.data[maxIdx]) > 0 {
+			maxIdx = left
+		}
+		if right < len(h.data) && h.data[right].Diff(h.data[maxIdx]) > 0 {
+			maxIdx = right
+		}
+		if maxIdx == i {
+			break
+		}
+		h.swap(maxIdx, i)
+		i = maxIdx
+	}
+}
+
+func (h *MaxHeap) Pop() Comparable {
+	if h.Empty() {
+		return nil
+	}
+	h.swap(0, len(h.data)-1)
+	result := h.data[len(h.data)-1]
+	h.data = h.data[:len(h.data)-1]
+
+	h.shiftDown(0)
+	return result
+}
+
+func (h *MaxHeap) Empty() bool {
+	return len(h.data) == 0
+}
+
+
+```
